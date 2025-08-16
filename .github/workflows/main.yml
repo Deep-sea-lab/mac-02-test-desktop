@@ -1,0 +1,36 @@
+name: Build and Zip Node Modules
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Zip node_modules
+      run: zip -r node_modules.zip node_modules
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: node_modules
+        path: node_modules.zip
+        retention-days: 7

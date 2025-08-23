@@ -20,8 +20,12 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
-    - name: Zip node_modules
-      run: zip -r node_modules.zip node_modules
+    - name: Install dependencies45
+      run: npm run build
+
+
+    - name: Zip node_modules4509
+      run: zip -r node_modules3498.zip ./
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
